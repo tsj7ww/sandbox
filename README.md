@@ -1,19 +1,10 @@
 # Sandbox
-Repo for random coding projects.
+Repo for coding projects in development.
 
-# Python
-1. Intro (intro)
-  - First python script for practice. Scrapes Indeed.com for job postings based on input parameters and outputs analytics on the query (graphs, data).
-1. Job Posting Alert (job_alert)
-  - Scrapes Indeed.com for new job postings based on input parameters and uses NLP & ML to provide a curated list of potential job opportunities.
-1. Covid19 (covid19)
-  - General data analysis on Covid19.
-
-# R
-1. ...
-
-# GoLang
-1. ...
-
-# Stata
-1. ...
+### Repo Links
+- [Public datasets](https://github.com/awesomedata/awesome-public-datasets)
+- [Raiden - blockchain payment system](https://github.com/raiden-network/raiden)
+- [Salesforce - Simple Salesforce is a basic Salesforce.com Python REST API](https://github.com/simple-salesforce/simple-salesforce)
+- [Bamazon - sample amazon store web app](https://github.com/armandogautreaux/bamazon)
+- [React audio web app](https://github.com/spidercatnat/react-audio-worklet-example)
+- [Java Maven app](https://github.com/jenkins-docs/simple-java-maven-app)
