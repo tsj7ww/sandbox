@@ -1,5 +1,8 @@
-*.ipynb_checkpoints/
-*.csv
-*.parquet
-*.dat
-*.pdf
+**.ipynb_checkpoints/
+**__pycache/
+**.pyc
+**.csv
+**.parquet
+**.dat
+**.pdf
+**.log
