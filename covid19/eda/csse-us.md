@@ -1,28 +1,29 @@
-# CSSE-US EDA 
+# EDA - CSSE-US Files 
 
-#### Column Name[IDX] - Sample (Dtype) 
-- PROVINCE_STATE[0] - object (Alabama / Wyoming) 
-- COUNTRY_REGION[1] - object (US / US) 
-- LAST_UPDATE[2] - object (2020-04-12 23:18:15 / 2020-05-01 02:32:32) 
-- LAT[3] - float64 (32.3182 / 42.756) 
-- LONG[4] - float64 (-86.9023 / -107.3025) 
-- CONFIRMED[5] - int64 (3563 / 559) 
-- DEATHS[6] - int64 (93 / 7) 
-- RECOVERED[7] - float64 (nan / 371.0) 
-- ACTIVE[8] - float64 (3470.0 / 181.0) 
-- FIPS[9] - float64 (1.0 / 56.0) 
-- INCIDENT_RATE[10] - float64 (75.98802021 / 112.42056149947712) 
-- PEOPLE_TESTED[11] - float64 (21583.0 / 9446.0) 
-- PEOPLE_HOSPITALIZED[12] - float64 (437.0 / 56.0) 
-- MORTALITY_RATE[13] - float64 (2.610159978 / 1.2522361359570662) 
-- UID[14] - int64 (84000001 / 84000056) 
-- ISO3[15] - object (USA / USA) 
-- TESTING_RATE[16] - float64 (460.3001516 / 1899.6862682004667) 
-- HOSPITALIZATION_RATE[17] - float64 (12.26494527 / 10.01788908765653) 
-- DATA_DT[18] - object (2020-04-12 / 2020-04-30) 
+#### Column Name [IDX] -  Dtype (Head / Tail) 
+- **PROVINCE_STATE** [0] - object (Alabama / Wyoming) 
+- **COUNTRY_REGION** [1] - object (US / US) 
+- **LAST_UPDATE** [2] - object (2020-04-12 23:18:15 / 2020-05-01 02:32:32) 
+- **LAT** [3] - float64 (32.3182 / 42.756) 
+- **LONG** [4] - float64 (-86.9023 / -107.3025) 
+- **CONFIRMED** [5] - int64 (3563 / 559) 
+- **DEATHS** [6] - int64 (93 / 7) 
+- **RECOVERED** [7] - float64 (nan / 371.0) 
+- **ACTIVE** [8] - float64 (3470.0 / 181.0) 
+- **FIPS** [9] - float64 (1.0 / 56.0) 
+- **INCIDENT_RATE** [10] - float64 (75.98802021 / 112.42056149947712) 
+- **PEOPLE_TESTED** [11] - float64 (21583.0 / 9446.0) 
+- **PEOPLE_HOSPITALIZED** [12] - float64 (437.0 / 56.0) 
+- **MORTALITY_RATE** [13] - float64 (2.610159978 / 1.2522361359570662) 
+- **UID** [14] - int64 (84000001 / 84000056) 
+- **ISO3** [15] - object (USA / USA) 
+- **TESTING_RATE** [16] - float64 (460.3001516 / 1899.6862682004667) 
+- **HOSPITALIZATION_RATE** [17] - float64 (12.26494527 / 10.01788908765653) 
+- **DATA_DT** [18] - object (2020-04-12 / 2020-04-30) 
 
 
-#### Head / Tail [20] Sample 
+
+#### Head / Tail [n=20] Sample 
 
 <table border="1" class="dataframe">
   <thead>

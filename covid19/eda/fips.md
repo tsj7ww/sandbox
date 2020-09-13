@@ -1,21 +1,22 @@
-# FIPS EDA 
+# EDA - FIPS Files 
 
-#### Column Name[IDX] - Sample (Dtype) 
-- UID[0] - int64 (4 / 84056045) 
-- ISO2[1] - object (AF / US) 
-- ISO3[2] - object (AFG / USA) 
-- CODE3[3] - float64 (4.0 / 840.0) 
-- FIPS[4] - float64 (nan / 56045.0) 
-- ADMIN2[5] - object (nan / Weston) 
-- PROVINCE_STATE[6] - object (nan / Wyoming) 
-- COUNTRY_REGION[7] - object (Afghanistan / US) 
-- LAT[8] - float64 (33.93911 / 43.83961191) 
-- LONG[9] - float64 (67.709953 / -104.56748809999999) 
-- COMBINED_KEY[10] - object (Afghanistan / Weston, Wyoming, US) 
-- POPULATION[11] - float64 (38928341.0 / 6927.0) 
+#### Column Name [IDX] -  Dtype (Head / Tail) 
+- **UID** [0] - int64 (4 / 84056045) 
+- **ISO2** [1] - object (AF / US) 
+- **ISO3** [2] - object (AFG / USA) 
+- **CODE3** [3] - float64 (4.0 / 840.0) 
+- **FIPS** [4] - float64 (nan / 56045.0) 
+- **ADMIN2** [5] - object (nan / Weston) 
+- **PROVINCE_STATE** [6] - object (nan / Wyoming) 
+- **COUNTRY_REGION** [7] - object (Afghanistan / US) 
+- **LAT** [8] - float64 (33.93911 / 43.83961191) 
+- **LONG** [9] - float64 (67.709953 / -104.56748809999999) 
+- **COMBINED_KEY** [10] - object (Afghanistan / Weston, Wyoming, US) 
+- **POPULATION** [11] - float64 (38928341.0 / 6927.0) 
 
 
-#### Head / Tail [20] Sample 
+
+#### Head / Tail [n=20] Sample 
 
 <table border="1" class="dataframe">
   <thead>

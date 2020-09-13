@@ -1,16 +1,17 @@
-# CSSE-TS-ERR EDA 
+# EDA - CSSE-TS-ERR Files 
 
-#### Column Name[IDX] - Sample (Dtype) 
-- UPDATE DATE[0] - object (4/7/2020 / 9/08/2020) 
-- FILE[1] - object (time_series_covid19_confirmed_US.csv / time_series_covid19_recovered_global.csv) 
-- LOCATION[2] - object (Viginia Island / Colombia) 
-- FIELD UPDATED[3] - object (3/29/2020 / 9/07/2020) 
-- OLD[4] - object (0 / 518229) 
-- NEW[5] - object (23 / 529279) 
-- COMMENTS[6] - object (New York Times / Update from Colombia news source) 
+#### Column Name [IDX] -  Dtype (Head / Tail) 
+- **UPDATE DATE** [0] - object (4/7/2020 / 9/08/2020) 
+- **FILE** [1] - object (time_series_covid19_confirmed_US.csv / time_series_covid19_recovered_global.csv) 
+- **LOCATION** [2] - object (Viginia Island / Colombia) 
+- **FIELD UPDATED** [3] - object (3/29/2020 / 9/07/2020) 
+- **OLD** [4] - object (0 / 518229) 
+- **NEW** [5] - object (23 / 529279) 
+- **COMMENTS** [6] - object (New York Times / Update from Colombia news source) 
 
 
-#### Head / Tail [20] Sample 
+
+#### Head / Tail [n=20] Sample 
 
 <table border="1" class="dataframe">
   <thead>

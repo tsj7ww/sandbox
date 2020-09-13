@@ -1,22 +1,23 @@
-# CSSE EDA 
+# EDA - CSSE Files 
 
-#### Column Name[IDX] - Sample (Dtype) 
-- FIPS[0] - float64 (45001.0 / nan) 
-- ADMIN2[1] - object (Abbeville / nan) 
-- PROVINCE_STATE[2] - object (South Carolina / nan) 
-- COUNTRY_REGION[3] - object (US / Zimbabwe) 
-- LAST_UPDATE[4] - object (2020-04-12 23:18:00 / 2020-05-01 02:32:28) 
-- LAT[5] - float64 (34.22333378 / -19.015438) 
-- LONG[6] - float64 (-82.46170658 / 29.154857) 
-- CONFIRMED[7] - int64 (9 / 40) 
-- DEATHS[8] - int64 (0 / 4) 
-- RECOVERED[9] - int64 (0 / 5) 
-- ACTIVE[10] - int64 (9 / 31) 
-- COMBINED_KEY[11] - object (Abbeville, South Carolina, US / Zimbabwe) 
-- DATA_DT[12] - object (2020-04-12 / 2020-04-30) 
+#### Column Name [IDX] -  Dtype (Head / Tail) 
+- **FIPS** [0] - float64 (45001.0 / nan) 
+- **ADMIN2** [1] - object (Abbeville / nan) 
+- **PROVINCE_STATE** [2] - object (South Carolina / nan) 
+- **COUNTRY_REGION** [3] - object (US / Zimbabwe) 
+- **LAST_UPDATE** [4] - object (2020-04-12 23:18:00 / 2020-05-01 02:32:28) 
+- **LAT** [5] - float64 (34.22333378 / -19.015438) 
+- **LONG** [6] - float64 (-82.46170658 / 29.154857) 
+- **CONFIRMED** [7] - int64 (9 / 40) 
+- **DEATHS** [8] - int64 (0 / 4) 
+- **RECOVERED** [9] - int64 (0 / 5) 
+- **ACTIVE** [10] - int64 (9 / 31) 
+- **COMBINED_KEY** [11] - object (Abbeville, South Carolina, US / Zimbabwe) 
+- **DATA_DT** [12] - object (2020-04-12 / 2020-04-30) 
 
 
-#### Head / Tail [20] Sample 
+
+#### Head / Tail [n=20] Sample 
 
 <table border="1" class="dataframe">
   <thead>
