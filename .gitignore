@@ -1,12 +1,12 @@
 # custom
 .ipynb_checkpoints/
 __pycache/
-.pyc
-.csv
-.parquet
-.dat
-.pdf
-.log
+*.pyc
+*.csv
+*.parquet
+*.dat
+*.pdf
+*.log
 data/
 artifacts/
 layers/
