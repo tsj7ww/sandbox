@@ -8,7 +8,7 @@ __pycache/
 *.dat
 *.pdf
 *.log
-data/
+# data/
 artifacts/
 layers/
 layer/
