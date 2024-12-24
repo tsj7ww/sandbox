@@ -1,0 +1,8 @@
+.git
+.gitignore
+.env
+*.md
+workspace/*
+!workspace/.gitkeep
+r-packages/*
+!r-packages/.gitkeep

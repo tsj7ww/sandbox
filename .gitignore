@@ -13,6 +13,14 @@ artifacts/
 layers/
 layer/
 env/
+# r
+.env
+workspace/*
+!workspace/.gitkeep
+r-packages/*
+!r-packages/.gitkeep
+.Rhistory
+.RData
 
 
 

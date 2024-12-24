@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  rstudio:
+    build: .
+    ports:
+      - "8787:8787"
+    environment:
+      # - PASSWORD=yourpassword  # Change this!
+      - ROOT=TRUE
+    volumes:
+      - ./workspace:/home/rstudio/workspace
+      - ./r-packages:/home/rstudio/r-packages
+    restart: unless-stopped
