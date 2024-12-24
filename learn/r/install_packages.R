@@ -1,52 +1,46 @@
-# File: install_packages.R
+# Install required system dependencies first
+system_deps <- function() {
+  system('apt-get update && apt-get install -y libxml2-dev libssl-dev libcurl4-openssl-dev')
+}
 
-# Set CRAN mirror for package installation
-options(repos = c(CRAN = "https://cran.rstudio.com/"))
-
-# Source the file containing the package list
-source("/tmp/packages.R")
-
-# Function to install packages if they're not already installed
-install_if_missing <- function(packages) {
-  # Get list of currently installed packages
-  installed <- installed.packages()[,"Package"]
+# Function to handle package installation with error handling
+install_packages_safely <- function(packages) {
+  # Set CRAN mirror
+  options(repos = c(CRAN = "https://cran.rstudio.com/"))
   
-  # Find which packages need to be installed
-  new_packages <- packages[!(packages %in% installed)]
+  # Read the package list
+  source("/tmp/packages.R")
   
-  if (length(new_packages) > 0) {
-    message("\nInstalling ", length(new_packages), " packages:")
-    message(paste(new_packages, collapse = ", "))
-    
-    # Install each package with error handling
-    for (pkg in new_packages) {
-      tryCatch({
-        install.packages(pkg, 
-                        dependencies = TRUE,
-                        quiet = TRUE)
-        message("Successfully installed: ", pkg)
-      }, error = function(e) {
-        message("Failed to install ", pkg, ": ", e$message)
-      }, warning = function(w) {
-        message("Warning while installing ", pkg, ": ", w$message)
-      })
-    }
-  } else {
-    message("\nAll packages are already installed!")
+  # Function to safely install a single package
+  install_single_package <- function(pkg) {
+    tryCatch({
+      if (!require(pkg, character.only = TRUE)) {
+        install.packages(pkg, dependencies = TRUE)
+      }
+      TRUE
+    }, error = function(e) {
+      message(sprintf("Failed to install %s: %s", pkg, e$message))
+      FALSE
+    })
   }
   
-  # Verify installations
-  installed_after <- installed.packages()[,"Package"]
-  still_missing <- new_packages[!(new_packages %in% installed_after)]
+  # Install packages
+  results <- sapply(packages, install_single_package)
   
-  if (length(still_missing) > 0) {
-    message("\nPackages that failed to install:")
-    message(paste(still_missing, collapse = ", "))
-  } else {
-    message("\nAll required packages are now installed!")
+  # Report results
+  successful <- sum(results)
+  failed <- sum(!results)
+  
+  message(sprintf("\nInstallation complete:\n- %d packages installed successfully\n- %d packages failed\n",
+                 successful, failed))
+  
+  # Return names of failed packages
+  if (failed > 0) {
+    failed_pkgs <- names(results)[!results]
+    message("Failed packages: ", paste(failed_pkgs, collapse = ", "))
   }
 }
 
 # Install packages
-message("Starting package installation...")
-install_if_missing(packages)
+system_deps()
+install_packages_safely(packages)
