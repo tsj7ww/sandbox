@@ -1,0 +1,78 @@
+version: '3.8'
+services:
+  superset:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: superset
+    ports:
+      - "8088:8088"
+    environment:
+      - SUPERSET_SECRET_KEY=your_secure_key_here
+      - SUPERSET_LOAD_EXAMPLES=yes
+      - SUPERSET_DB_USER=superset
+      - SUPERSET_DB_PASSWORD=superset
+      - SUPERSET_DB_HOST=db
+      - SUPERSET_DB_PORT=5432
+      - SUPERSET_DB=superset
+    volumes:
+      - superset_home:/app/superset_home
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8088/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G
+        reservations:
+          cpus: '0.5'
+          memory: 2G
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - superset_network
+
+  db:
+    image: postgres:14-alpine
+    container_name: superset_db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=superset
+      - POSTGRES_PASSWORD=superset
+      - POSTGRES_DB=superset
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "superset"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+        reservations:
+          cpus: '0.25'
+          memory: 1G
+    networks:
+      - superset_network
+
+volumes:
+  postgres_data:
+    name: superset_postgres_data
+    driver: local
+  superset_home:
+    name: superset_home
+    driver: local
+
+networks:
+  superset_network:
+    name: superset_network
+    driver: bridge
