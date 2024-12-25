@@ -1,0 +1,16 @@
+{{ define "content" }}
+<div class="tasks">
+    <form action="/tasks/add" method="POST" class="add-task">
+        <input type="text" name="title" placeholder="New task..." required>
+        <button type="submit">Add Task</button>
+    </form>
+    
+    <ul class="task-list">
+        {{ range . }}
+        <li>
+            <span class="task-title">{{ .Title }}</span>
+        </li>
+        {{ end }}
+    </ul>
+</div>
+{{ end }}
