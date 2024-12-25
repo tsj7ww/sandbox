@@ -1,0 +1,208 @@
+version: '3.8'
+
+services:
+  # Frontend Services
+  angular-app:
+    build:
+      context: ./src/frontend/angular-app
+      dockerfile: ../../docker/frontend/angular/Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./src/frontend/angular-app:/app
+      - /app/node_modules
+    depends_on:
+      - api-gateway
+
+  nextjs-app:
+    build:
+      context: ./src/frontend/nextjs-app
+      dockerfile: ../../docker/frontend/nextjs/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src/frontend/nextjs-app:/app
+      - /app/node_modules
+
+  react-app:
+    build:
+      context: ./src/frontend/react-app
+      dockerfile: ../../docker/frontend/react/Dockerfile
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./src/frontend/react-app:/app
+      - /app/node_modules
+
+  # API Gateway
+  api-gateway:
+    build:
+      context: ./docker/backend/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - fastapi-service
+      - flask-service
+      - spring-service
+      - express-service
+      - gin-service
+
+  # Backend Services
+  fastapi-service:
+    build:
+      context: ./src/backend/fastapi-app
+      dockerfile: ../../docker/backend/fastapi/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src/backend/fastapi-app:/app
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017
+      - MYSQL_URL=mysql://root:password@mysql:3306/testdb
+      - POSTGRES_URL=postgresql://postgres:password@postgres:5432/testdb
+      - REDIS_URL=redis://redis:6379
+      - MINIO_URL=minio:9000
+    depends_on:
+      - mongodb
+      - mysql
+      - postgres
+      - redis
+      - minio
+
+  flask-service:
+    build:
+      context: ./src/backend/flask-app
+      dockerfile: ../../docker/backend/flask/Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./src/backend/flask-app:/app
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017
+      - MYSQL_URL=mysql://root:password@mysql:3306/testdb
+      - POSTGRES_URL=postgresql://postgres:password@postgres:5432/testdb
+    depends_on:
+      - mongodb
+      - mysql
+      - postgres
+
+  spring-service:
+    build:
+      context: ./src/backend/spring-app
+      dockerfile: ../../docker/backend/spring-boot/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/testdb
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/testdb
+    depends_on:
+      - mongodb
+      - mysql
+
+  express-service:
+    build:
+      context: ./src/backend/express-app
+      dockerfile: ../../docker/backend/express/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src/backend/express-app:/app
+      - /app/node_modules
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - mongodb
+      - redis
+
+  gin-service:
+    build:
+      context: ./src/backend/gin-app
+      dockerfile: ../../docker/backend/gin/Dockerfile
+    ports:
+      - "8090:8080"
+    volumes:
+      - ./src/backend/gin-app:/app
+    environment:
+      - POSTGRES_URL=postgresql://postgres:password@postgres:5432/testdb
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - postgres
+      - redis
+
+  # Databases
+  mongodb:
+    build:
+      context: ./docker/databases/mongodb
+      dockerfile: Dockerfile
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  mysql:
+    build:
+      context: ./docker/databases/mysql
+      dockerfile: Dockerfile
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=testdb
+
+  postgres:
+    build:
+      context: ./docker/databases/postgres
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=testdb
+
+  redis:
+    build:
+      context: ./docker/databases/redis
+      dockerfile: Dockerfile
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  minio:
+    build:
+      context: ./docker/databases/minio
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+
+  timescaledb:
+    build:
+      context: ./docker/databases/timescaledb
+      dockerfile: Dockerfile
+    ports:
+      - "5433:5432"
+    volumes:
+      - timescaledb_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=testdb
+
+volumes:
+  mongodb_data:
+  mysql_data:
+  postgres_data:
+  redis_data:
+  minio_data:
+  timescaledb_data:
