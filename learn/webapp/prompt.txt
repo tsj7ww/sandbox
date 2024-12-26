@@ -1,0 +1,289 @@
+approach this problem as if you have your masters degree in computer science and work as a lead software engineer at a top tech company. I am trying to learn more about full stack web development. I would like to test out a bunch of different framework and software options. I am building a simple task manager web app. 
+
+please build a shell script that will automatically create all of these folders and files starting from the root directory
+
+project-root/
+├── .github/
+│   └── workflows/
+│       ├── ci.yml
+│       └── cd.yml
+├── .gitignore
+├── .env.example
+├── .dockerignore
+├── docker/
+│   ├── frontend/
+│   │   ├── angular/
+│   │   │   ├── Dockerfile
+│   │   │   ├── Dockerfile.prod
+│   │   │   └── nginx.conf
+│   │   ├── nextjs/
+│   │   │   ├── Dockerfile
+│   │   │   └── Dockerfile.prod
+│   │   └── react/
+│   │       ├── Dockerfile
+│   │       └── Dockerfile.prod
+│   ├── backend/
+│   │   ├── fastapi/
+│   │   │   ├── Dockerfile
+│   │   │   └── Dockerfile.prod
+│   │   ├── flask/
+│   │   │   ├── Dockerfile
+│   │   │   └── Dockerfile.prod
+│   │   ├── spring-boot/
+│   │   │   ├── Dockerfile
+│   │   │   └── Dockerfile.prod
+│   │   ├── express/
+│   │   │   ├── Dockerfile
+│   │   │   └── Dockerfile.prod
+│   │   └── gin/
+│   │       ├── Dockerfile
+│   │       └── Dockerfile.prod
+│   └── databases/
+│       ├── init-scripts/
+│       │   ├── mongodb/
+│       │   │   └── init.js
+│       │   ├── mysql/
+│       │   │   └── init.sql
+│       │   ├── postgres/
+│       │   │   └── init.sql
+│       │   ├── timescaledb/
+│       │   │   └── init.sql
+│       │   ├── redis/
+│       │   │   ├── init.redis
+│       │   │   └── sentinel.conf
+│       │   └── minio/
+│       │       └── init.sh
+│       ├── config/
+│       │   ├── mongodb/
+│       │   │   └── mongod.conf
+│       │   ├── mysql/
+│       │   │   └── my.cnf
+│       │   ├── postgres/
+│       │   │   └── postgresql.conf
+│       │   ├── timescaledb/
+│       │   │   └── timescaledb.conf
+│       │   ├── redis/
+│       │   │   ├── redis.conf
+│       │   │   └── sentinel.conf
+│       │   └── minio/
+│       │       └── config.env
+│       ├── mongodb/
+│       │   ├── Dockerfile
+│       │   └── Dockerfile.prod
+│       ├── mysql/
+│       │   ├── Dockerfile
+│       │   └── Dockerfile.prod
+│       ├── postgres/
+│       │   ├── Dockerfile
+│       │   └── Dockerfile.prod
+│       ├── timescaledb/
+│       │   ├── Dockerfile
+│       │   └── Dockerfile.prod
+│       ├── redis/
+│       │   ├── Dockerfile
+│       │   └── Dockerfile.prod
+│       └── minio/
+           ├── Dockerfile
+           └── Dockerfile.prod
+├── src/
+│   ├── frontend/
+│   │   ├── angular-app/
+│   │   │   ├── src/
+│   │   │   │   ├── app/
+│   │   │   │   │   ├── components/
+│   │   │   │   │   ├── services/
+│   │   │   │   │   └── shared/
+│   │   │   │   └── assets/
+│   │   │   ├── tests/
+│   │   │   ├── package.json
+│   │   │   └── angular.json
+│   │   ├── nextjs-app/
+│   │   │   ├── pages/
+│   │   │   ├── components/
+│   │   │   ├── public/
+│   │   │   ├── styles/
+│   │   │   ├── tests/
+│   │   │   └── package.json
+│   │   └── react-app/
+│   │       ├── src/
+│   │       │   ├── components/
+│   │       │   ├── hooks/
+│   │       │   ├── pages/
+│   │       │   ├── services/
+│   │       │   ├── utils/
+│   │       │   └── App.tsx
+│   │       ├── public/
+│   │       ├── tests/
+│   │       └── package.json
+│   └── backend/
+│       ├── shared/
+│       │   ├── models/
+│       │   │   ├── base.model.ts
+│       │   │   └── response.model.ts
+│       │   ├── interfaces/
+│       │   │   ├── repository.interface.ts
+│       │   │   ├── service.interface.ts
+│       │   │   ├── cache.interface.ts
+│       │   │   └── storage.interface.ts
+│       │   └── utils/
+│       │       ├── database.util.ts
+│       │       ├── redis.util.ts
+│       │       └── minio.util.ts
+│       ├── fastapi-app/
+│       │   ├── app/
+│       │   │   ├── api/
+│       │   │   ├── core/
+│       │   │   │   ├── cache/
+│       │   │   │   │   └── redis_manager.py
+│       │   │   │   └── storage/
+│       │   │   │       └── minio_manager.py
+│       │   │   ├── models/
+│       │   │   ├── services/
+│       │   │   └── main.py
+│       │   ├── tests/
+│       │   └── requirements.txt
+│       ├── flask-app/
+│       │   ├── app/
+│       │   │   ├── api/
+│       │   │   ├── extensions/
+│       │   │   │   ├── redis_ext.py
+│       │   │   │   └── minio_ext.py
+│       │   │   ├── models/
+│       │   │   ├── services/
+│       │   │   └── __init__.py
+│       │   ├── tests/
+│       │   └── requirements.txt
+│       ├── spring-app/
+│       │   ├── src/
+│       │   │   ├── main/
+│       │   │   │   ├── java/
+│       │   │   │   │   └── config/
+│       │   │   │   │       ├── RedisConfig.java
+│       │   │   │   │       └── MinioConfig.java
+│       │   │   │   └── resources/
+│       │   │   │       └── application.yml
+│       │   │   └── test/
+│       │   ├── pom.xml
+│       │   └── mvnw
+│       ├── express-app/
+│       │   ├── src/
+│       │   │   ├── controllers/
+│       │   │   ├── middleware/
+│       │   │   ├── models/
+│       │   │   ├── routes/
+│       │   │   ├── services/
+│       │   │   │   ├── redis.service.ts
+│       │   │   │   ├── minio.service.ts
+│       │   │   │   └── db.service.ts
+│       │   │   └── app.ts
+│       │   ├── tests/
+│       │   └── package.json
+│       └── gin-app/
+           ├── cmd/
+           │   └── server/
+           ├── internal/
+           │   ├── api/
+           │   ├── cache/
+           │   │   └── redis.go
+           │   ├── storage/
+           │   │   └── minio.go
+           │   ├── middleware/
+           │   ├── models/
+           │   └── services/
+           ├── pkg/
+           └── go.mod
+├── kubernetes/
+│   ├── base/
+│   │   ├── frontend/
+│   │   │   ├── deployment.yaml
+│   │   │   └── service.yaml
+│   │   ├── backend/
+│   │   │   ├── deployment.yaml
+│   │   │   └── service.yaml
+│   │   └── databases/
+│   │       ├── mongodb/
+│   │       ├── mysql/
+│   │       ├── postgres/
+│   │       ├── timescaledb/
+│   │       ├── redis/
+│   │       │   ├── deployment.yaml
+│   │       │   ├── service.yaml
+│   │       │   └── configmap.yaml
+│   │       └── minio/
+│   │           ├── deployment.yaml
+│   │           ├── service.yaml
+│   │           ├── ingress.yaml
+│   │           └── pvc.yaml
+│   ├── overlays/
+│   │   ├── development/
+│   │   ├── staging/
+│   │   └── production/
+│   └── kustomization.yaml
+├── terraform/
+│   ├── environments/
+│   │   ├── dev/
+│   │   ├── staging/
+│   │   └── prod/
+│   └── modules/
+│       ├── networking/
+│       ├── kubernetes/
+│       └── databases/
+│           ├── mongodb/
+│           ├── mysql/
+│           ├── postgres/
+│           ├── timescaledb/
+│           ├── redis/
+│           │   ├── main.tf
+│           │   ├── variables.tf
+│           │   └── outputs.tf
+│           └── minio/
+               ├── main.tf
+               ├── variables.tf
+               └── outputs.tf
+├── scripts/
+│   ├── setup/
+│   ├── deployment/
+│   └── database/
+│       ├── migrations/
+│       └── seeders/
+├── tests/
+│   ├── integration/
+│   │   ├── api/
+│   │   └── database/
+│   ├── e2e/
+│   │   ├── frontend/
+│   │   └── backend/
+│   └── load/
+│       └── k6-scripts/
+├── docs/
+│   ├── api/
+│   │   └── openapi.yaml
+│   ├── architecture/
+│   │   ├── database.md
+│   │   ├── caching.md
+│   │   └── storage.md
+│   ├── deployment/
+│   └── development/
+├── monitoring/
+│   ├── grafana/
+│   │   └── dashboards/
+│   │       ├── redis-dashboard.json
+│   │       ├── minio-dashboard.json
+│   │       └── app-dashboard.json
+│   ├── prometheus/
+│   │   └── rules/
+│   │       ├── redis-alerts.yaml
+│   │       ├── minio-alerts.yaml
+│   │       └── app-alerts.yaml
+│   └── loki/
+├── ci/
+│   ├── jenkins/
+│   │   ├── Jenkinsfile
+│   │   └── scripts/
+│   └── github-actions/
+│       └── templates/
+├── docker-compose.yaml
+├── docker-compose.dev.yaml
+├── docker-compose.test.yaml
+├── Makefile
+└── README.md

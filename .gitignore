@@ -112,18 +112,6 @@ target/
 profile_default/
 ipython_config.py
 
-# pyenv
-#   For a library or package, you might want to ignore these files since the code is
-#   intended to run in multiple environments; otherwise, check them in:
-# .python-version
-
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-#Pipfile.lock
-
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow
 __pypackages__/
 
@@ -166,3 +154,221 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+
+###################
+### Web App Dev ###
+###################
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# IDE and Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules/
+vendor/
+.pnp
+.pnp.js
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+.venv/
+ENV/
+.env/
+.python-version
+
+# Java
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Golang
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+vendor/
+
+# Testing
+coverage/
+.nyc_output/
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+out/
+.next/
+.nuxt/
+.docusaurus
+.serverless/
+.fusebox/
+.dynamodb/
+.tern-port
+.vuepress/dist
+.temp
+.cache
+
+# Angular specific
+.angular/cache
+.sass-cache/
+connect.lock
+libpeerconnection.log
+testem.log
+/typings
+
+# React specific
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Docker
+.docker/data/
+docker-compose.override.yml
+
+# Kubernetes
+kubeconfig
+*.kubeconfig
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!example.tfvars
+.terraformrc
+terraform.rc
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
+
+# Database files
+*.sqlite
+*.sqlite3
+*.db
+*.sql.gz
+dump.rdb
+
+# MinIO
+.minio.sys/
+
+# Monitoring
+prometheus/data/
+grafana/data/
+loki/data/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Compiled binary addons
+build/Release
+
+# Local development
+*.local
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Debug files
+.debug/
+debug/
+Debug/
+
+# Crash reports
+crash-reports/
+*.dump
+
+# Generated files
+generated/
+*.generated.*
+.generated/
+
+# CI/CD
+.npmrc
+.yarnrc
