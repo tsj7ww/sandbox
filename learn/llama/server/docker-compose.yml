@@ -1,0 +1,33 @@
+services:
+  llama:
+    build: 
+      dockerfile: Dockerfile.llama
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../models:/models
+    platform: linux/arm64
+    environment:
+      - LLAMA_CPP_VERBOSE=true  # Enable verbose logging for debugging
+    deploy:
+      resources:
+        limits:
+          memory: 8G  # Adjust based on your model size
+        reservations:
+          memory: 4G
+
+  jupyter:
+    build:
+      dockerfile: Dockerfile.jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - ../workspace:/home/jupyter/workspace
+    environment:
+      - LLAMA_API_BASE=http://llama:8080/v1
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=""
+      - JUPYTER_PASSWORD=""
+    platform: linux/arm64
+    depends_on:
+      - llama

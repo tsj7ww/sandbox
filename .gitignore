@@ -4,6 +4,7 @@
 __pycache/
 *.pyc
 *.csv
+*.gguf
 *.parquet
 *.dat
 *.pdf

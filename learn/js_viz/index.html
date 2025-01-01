@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualization Dashboard</title>
+    <link rel="stylesheet" href="static/style.css">
+    
+    <!-- Load visualization libraries -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Health Rankings Dashboard</h1>
+        
+        <div class="viz-container">
+            <div id="d3-viz" class="viz-box">
+                <h2>D3.js Visualization</h2>
+            </div>
+            <div id="chartjs-viz" class="viz-box">
+                <h2>Chart.js Visualization</h2>
+                <canvas id="chartjs-canvas"></canvas>
+            </div>
+            <div id="plotly-viz" class="viz-box">
+                <h2>Plotly.js Visualization</h2>
+            </div>
+            <div id="echarts-viz" class="viz-box">
+                <h2>ECharts Visualization</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load your visualization scripts -->
+    <script src="viz/d3.js"></script>
+    <script src="viz/charts.js"></script>
+    <script src="viz/plotly.js"></script>
+    <script src="viz/echarts.js"></script>
+    <script src="static/scripts.js"></script>
+</body>
+</html>

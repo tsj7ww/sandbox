@@ -1,0 +1,19 @@
+FROM python:3.11-slim
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install llama-cpp-python with server
+RUN pip install --no-cache-dir llama-cpp-python[server]
+
+# Create directory for model
+RUN mkdir -p /models
+
+# Expose the default server port
+EXPOSE 8080
+
+# Start the server
+CMD ["python", "-m", "llama_cpp.server", "--model", "/models/model.gguf", "--host", "0.0.0.0", "--port", "8080"]

@@ -1,0 +1,39 @@
+services:
+  jupyter:
+    build: .
+    container_name: ds-llama-workspace
+    image: ds-llama-workspace
+    platform: linux/arm64
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./workspace:/workspace
+      - ./models:/models
+    environment:
+      - JUPYTER_TOKEN=password
+      - PYTHONPATH=/workspace
+      # Environment variables for MLflow
+      - MLFLOW_TRACKING_URI=./mlruns
+      # Environment variables for Weights & Biases
+      - WANDB_DIR=/workspace/wandb
+    deploy:
+      resources:
+        limits:
+          memory: 16G
+          cpus: '4'
+        reservations:
+          memory: 4G
+    # Add healthcheck
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/lab"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  workspace:
+    driver: local
+  models:
+    driver: local
+  data:
+    driver: local

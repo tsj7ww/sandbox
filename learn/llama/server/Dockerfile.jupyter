@@ -1,0 +1,45 @@
+FROM debian:bookworm-slim
+
+# Prevent prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3.11 \
+    python3-pip \
+    python3-venv \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create a non-root user
+RUN useradd -m -s /bin/bash jupyter
+
+# Set up working directory and permissions
+WORKDIR /home/jupyter
+RUN mkdir -p /home/jupyter/workspace && \
+    chown -R jupyter:jupyter /home/jupyter
+
+# Switch to non-root user
+USER jupyter
+
+# Create and activate virtual environment
+RUN python3 -m venv /home/jupyter/venv
+ENV PATH="/home/jupyter/venv/bin:$PATH"
+
+# Install Python packages
+COPY --chown=jupyter:jupyter requirements.txt /tmp/
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
+
+# Expose JupyterLab port
+EXPOSE 8888
+
+# Set default command with proper token configuration
+CMD ["jupyter", "lab", \
+     "--ip", "0.0.0.0", \
+     "--port", "8888", \
+     "--no-browser", \
+     "--NotebookApp.token=''", \
+     "--NotebookApp.password=''", \
+     "--allow-root", \
+     "--NotebookApp.allow_origin='*'", \
+     "--NotebookApp.allow_remote_access=True"]

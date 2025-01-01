@@ -1,0 +1,59 @@
+{
+    "ServerApp": {
+        "token": "",
+        "password": "",
+        "allow_origin": "*",
+        "allow_root": true,
+        "ip": "0.0.0.0",
+        "port": 8888,
+        "notebook_dir": "/workspace",
+        "open_browser": false,
+        "webbrowser_open_new": 0,
+        "root_dir": "/workspace"
+    },
+    "LabApp": {
+        "collaborative": true,
+        "expose_app_in_browser": true
+    },
+    // User settings directory - this is where theme settings will be stored
+    "UserSettings": {
+        "@jupyterlab/apputils-extension:themes": {
+            "theme": "JupyterLab Dark",
+            "theme-scrollbars": true
+        }
+    },
+    // Workspaces settings
+    "WorkspaceApp": {
+        "workspaces-dir": "/root/.jupyter/lab/workspaces"
+    },
+    "ContentsManager": {
+        "allow_hidden": true
+    },
+    "KernelSpecManager": {
+        "ensure_native_kernel": false
+    },
+    "NotebookApp": {
+        "terminado_settings": {
+            "shell_command": ["/bin/bash"]
+        }
+    },
+    "Session": {
+        "debug": false
+    },
+    "LanguageServerManager": {
+        "autodetect": true
+    },
+    // Editor settings
+    "@jupyterlab/fileeditor-extension:plugin": {
+        "editorConfig": {
+            "lineNumbers": true,
+            "lineWrap": true,
+            "rulers": [80, 100],
+            "codeFolding": true,
+            "tabSize": 4,
+            "insertSpaces": true,
+            "matchBrackets": true,
+            "autoClosingBrackets": true
+        }
+    }
+}

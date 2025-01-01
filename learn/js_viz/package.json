@@ -1,0 +1,12 @@
+{
+  "name": "visualization-dashboard",
+  "version": "1.0.0",
+  "description": "Interactive visualization dashboard",
+  "main": "static/server.js",
+  "scripts": {
+    "start": "node static/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
