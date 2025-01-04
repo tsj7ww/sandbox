@@ -1,0 +1,108 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NODE_ENV=development
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - POSTGRES_URI=postgresql://user:password@postgres:5432/taskdb
+      - MONGODB_URI=mongodb://mongodb:27017/taskdb  # Changed this line
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+      - MINIO_ENDPOINT=minio:9000
+      - LOG_LEVEL=DEBUG
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_started
+      minio:
+        condition: service_started
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  postgres:
+    image: postgres:14
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=taskdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d taskdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  mongodb:
+    image: mongo:latest
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=user
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+  mongodb_data:
+  minio_data:
+
+networks:
+  app-network:
+    driver: bridge
