@@ -1,0 +1,32 @@
+site_name: baseball
+site_description: Baseball modeling
+site_author: Trevor Jordan
+repo_url: https://github.com/tsj7ww/baseball
+use_directory_urls: false
+
+theme:
+  name: material
+
+plugins:
+  - search
+  - autorefs
+  - mkdocstrings:
+      handlers:
+        python:
+          selection:
+            docstring_style: google
+          rendering:
+            show_source: true
+
+markdown_extensions:
+  - toc
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+nav:
+  - Home: index.md
+  - Collect: collect.md
+  - Preprocess: preprocess.md
+  - Model: model.md
+  - Portfolio: portfolio.md
+  - Analysis: analysis.md

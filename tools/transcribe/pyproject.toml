@@ -1,0 +1,15 @@
+[project]
+name = "transcribe-summarize"
+version = "0.1.0"
+description = "Local transcription (MLX Whisper on Apple Silicon) + cloud summarization (Claude API)."
+# mlx ships wheels for cp310-cp314; the <3.14 cap keeps torch resolvable.
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "mlx-whisper>=0.4.3",
+    "anthropic>=0.120.2",
+]
+
+# Virtual project: uv manages the dependency environment but does not build or
+# install this directory as a package, so no build backend is needed.
+[tool.uv]
+package = false

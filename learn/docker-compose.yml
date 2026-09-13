@@ -1,0 +1,61 @@
+# Single-container environments. Multi-service ones (airflow, superset) keep
+# their own env/<ENV>/docker-compose.yml. Run everything through the Makefile,
+# which sets ENV, the project name and the profile:  make up ENV=cpp
+
+x-env: &env
+  tty: true
+  stdin_open: true
+  working_dir: /workspace
+  volumes:
+    - ./env/${ENV:?run via make, e.g. make up ENV=cpp}:/workspace
+    - ./shared:/shared
+
+# Tools have no server to run; keep them alive for `make shell`.
+x-tool: &tool
+  <<: *env
+  command: tail -f /dev/null
+
+# These Dockerfiles hardcode an amd64 JAVA_HOME, so run them under emulation.
+x-amd64: &amd64
+  <<: *env
+  platform: linux/amd64
+
+services:
+  # --- tools ---
+  arrow:      { <<: *tool, profiles: [arrow],      build: env/arrow }
+  avro:       { <<: *tool, profiles: [avro],       build: env/avro }
+  cpp:        { <<: *tool, profiles: [cpp],        build: env/cpp }
+  git:        { <<: *tool, profiles: [git],        build: env/git }
+  hadoop:     { <<: *tool, profiles: [hadoop],     build: env/hadoop, platform: linux/amd64, ports: ["127.0.0.1:9870:9870"] }
+  javascript: { <<: *tool, profiles: [javascript], build: env/javascript }
+  kubernetes: { <<: *tool, profiles: [kubernetes], build: env/kubernetes }
+  lucene:     { <<: *tool, profiles: [lucene],     build: env/lucene }
+  postman:    { <<: *tool, profiles: [postman],    build: env/postman }
+  terraform:  { <<: *tool, profiles: [terraform],  build: env/terraform }
+
+  # --- servers ---
+  cassandra:  { <<: *amd64, profiles: [cassandra], build: env/cassandra, ports: ["127.0.0.1:9042:9042"] }
+  druid:      { <<: *amd64, profiles: [druid],     build: env/druid,     ports: ["127.0.0.1:8081:8081"] }
+  kafka:      { <<: *amd64, profiles: [kafka],     build: env/kafka,     ports: ["127.0.0.1:9092:9092"] }
+  nifi:       { <<: *amd64, profiles: [nifi],      build: env/nifi,      ports: ["127.0.0.1:8084:8080"] }
+  spark:      { <<: *amd64, profiles: [spark],     build: env/spark,     ports: ["127.0.0.1:4040:4040"] }
+  elk:        { <<: *env, profiles: [elk],        build: env/elk,        ports: ["127.0.0.1:5601:5601", "127.0.0.1:9200:9200"] }
+  go:         { <<: *env, profiles: [go],         build: env/go,         ports: ["127.0.0.1:8080:8080"], environment: [GO_ENV=development] }
+  grafana:    { <<: *env, profiles: [grafana],    build: env/grafana,    ports: ["127.0.0.1:3000:3000"] }
+  jenkins:    { <<: *env, profiles: [jenkins],    build: env/jenkins,    ports: ["127.0.0.1:8083:8080"] }
+  js_viz:     { <<: *env, profiles: [js_viz],     build: env/js_viz,     ports: ["127.0.0.1:3001:3000"], environment: [NODE_ENV=development] }
+  prometheus: { <<: *env, profiles: [prometheus], build: env/prometheus, ports: ["127.0.0.1:9090:9090"] }
+  r:          { <<: *env, profiles: [r],          build: env/r,          ports: ["127.0.0.1:8787:8787"], environment: [ROOT=TRUE, DISABLE_AUTH=true] }
+  stan:       { <<: *env, profiles: [stan],       build: env/stan,       ports: ["127.0.0.1:8888:8888"] }
+  llm:        { <<: *env, profiles: [llm],        build: env/llm,        ports: ["127.0.0.1:8889:8888", "127.0.0.1:8086:8080"] }
+
+  # --- ml: mlflow and kubeflow each get their own postgres ---
+  postgres:
+    profiles: [mlflow, kubeflow]
+    image: postgres:15-alpine
+    environment: [POSTGRES_USER=mlflow, POSTGRES_PASSWORD=mlflow]
+    volumes: ["./env/mlflow/postgres-init.sh:/docker-entrypoint-initdb.d/init.sh:ro"]
+  mlflow:     { <<: *env, profiles: [mlflow],     build: env/mlflow,     ports: ["127.0.0.1:5000:5000"], depends_on: [postgres] }
+  kubeflow:   { <<: *env, profiles: [kubeflow],   build: env/kubeflow/dashboard, ports: ["127.0.0.1:8087:8080"], depends_on: [postgres] }
+  kubeflow-pipelines:
+    { <<: *env, profiles: [kubeflow], build: env/kubeflow/pipelines, ports: ["127.0.0.1:8890:8888"], depends_on: [postgres] }

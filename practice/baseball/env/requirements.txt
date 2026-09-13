@@ -1,0 +1,92 @@
+# Core Data Science and Machine Learning
+numpy==1.26.3
+pandas==2.1.4
+scipy==1.11.4
+scikit-learn==1.3.2
+torch==2.1.2
+
+# Parallel Computing and Acceleration
+# dask[complete]==2024.1.0
+# distributed==2024.1.0
+# numba==0.58.1
+# llvmlite==0.41.1
+joblib==1.3.2
+
+# Database and Data Storage
+pyarrow==14.0.2
+
+# Gradient Boosting Frameworks
+xgboost==2.0.3
+lightgbm==4.2.0
+catboost==1.2.2
+
+# Bayesian Modeling
+pymc==5.10.4
+arviz==0.17.1
+
+# Stan packages
+# pystan==3.7.0
+# cmdstanpy==1.2.0
+# stan==1.3.0
+
+# Machine Learning
+pytorch-lightning==2.1.3
+networkx==3.2.1
+
+# Data Visualization
+matplotlib==3.8.2
+seaborn==0.13.1
+plotly==5.18.0
+
+# Jupyter and Notebook Support
+ipykernel==6.28.0
+jupyterlab==4.0.10
+
+# Time Series and Statistics
+statsmodels==0.14.1
+pmdarima==2.0.4
+
+# Development and Testing
+pytest==7.4.3
+pylint==3.0.3
+black==23.12.1
+
+# Data collection
+requests==2.31.0  # For API calls to Baseball Reference, FanGraphs
+beautifulsoup4==4.12.2  # For web scraping betting odds
+selenium==4.16.0  # For dynamic website scraping
+pandas-datareader==0.10.0  # For financial data handling
+aiohttp==3.9.1  # For async API calls
+
+# Feature engineering
+feature-engine==1.6.2  # Advanced feature engineering tools
+category_encoders==2.6.3  # For handling categorical variables
+featuretools==1.28.0  # Automated feature engineering
+
+# ML tools
+# mlflow==2.9.2  # For experiment tracking and model versioning
+optuna==3.4.0  # For hyperparameter optimization
+shap==0.44.0  # For model interpretability
+
+# Portfolio optimization
+cvxopt==1.3.2  # For convex optimization problems
+empyrical==0.5.5  # For financial risk metrics
+
+# Data validation
+great-expectations==0.18.7  # For data quality checks
+pandera==0.18.0  # For data validation
+
+# Environment
+python-dotenv==1.0.0  # For managing environment variables/API keys
+pyyaml==6.0.1  # For configuration files
+
+# Documentation - MkDocs
+mkdocs==1.6.1  # Core MkDocs package
+mkdocs-material==9.6.9  # Material theme for MkDocs
+mkdocstrings==0.29.0  # For auto-generating documentation from docstrings
+mkdocstrings-python==1.16.8  # Python handler for mkdocstrings
+mkdocs-autorefs==1.4.1  # For automatic reference linking
+# pymdown-extensions==10.7  # Extensions for Markdown in MkDocs
+# mkdocs-awesome-pages-plugin==2.9.2  # For better page navigation 
+# mkdocs-git-revision-date-localized-plugin==1.2.2  # For showing last update time
+# mkdocs-minify-plugin==0.7.1  # For minifying HTML, JS, CSS

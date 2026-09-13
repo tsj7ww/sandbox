@@ -1,0 +1,61 @@
+services:
+  jupyter:
+    build: 
+      context: .
+      dockerfile: env/Dockerfile
+    container_name: baseball-jupyter
+    image: baseball-jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/workspace
+    environment:
+      - PYTHONPATH=/workspace/src
+    command: jupyter lab --ip 0.0.0.0 --port 8888 --allow-root --no-browser --NotebookApp.token='baseball'
+    # deploy:
+    #   resources:
+    #     limits:
+    #       memory: 4G
+    #       cpus: '2'
+    # networks:
+    #   - baseball-net
+
+  # scheduler:
+  #   build: 
+  #     # context: .
+  #     # dockerfile: env/Dockerfile
+  #  container_name: baseball-scheduler
+  #  image: baseball-scheduler
+  #   ports:
+  #     - "8787:8787"
+  #     - "8786:8786"
+  #   command: dask scheduler
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         memory: 2G
+  #         cpus: '1'
+  #   networks:
+  #     - baseball-net
+
+  # worker:
+  #   build: 
+  #     # context: .
+  #     # dockerfile: env/Dockerfile
+  #  container_name: baseball-worker
+  #  image: baseball-worker
+  #   command: dask worker scheduler:8786 --memory-limit 4GB --nthreads 2
+  #   deploy:
+  #     replicas: 2
+  #     resources:
+  #       limits:
+  #         memory: 4G
+  #         cpus: '2'
+  #   environment:
+  #     - DASK_DISTRIBUTED__WORKER__MEMORY__TARGET=0.85
+  #   networks:
+  #     - baseball-net
+
+# networks:
+#   baseball-net:
+#     driver: bridge

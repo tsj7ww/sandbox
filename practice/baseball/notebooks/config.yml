@@ -1,0 +1,9 @@
+cache_dir: 'data'
+
+baseball_api_key: 
+baseball_base_url: 
+
+weather_api_key: 
+backup_weather_api_key: 
+
+sportsbook_api_keys: 
